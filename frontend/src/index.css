@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.item {
+    @apply
+    text-gray-100
+    text-xl font-bold
+    flex items-center content-center justify-center
+    rounded
+}
