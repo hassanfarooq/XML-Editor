@@ -7,12 +7,15 @@ import SplitterDemo from "./SplitterDemo";
 import ParserOptions from "./ParserOptions";
 import {convertToJson, getTraversalObj, parse, validate} from 'fast-xml-parser'
 import Modes from "./ResultModes"
+
 import NavBarTailwind from "./NavBarTailwind";
 import ToolBarDemo from "./ToolBar";
-import ClosingAlert from "./Alert";
 import axios from 'axios';
-import Encoder from "./ext/demo";
-
+import Encoder from "./ext/app-encoder";
+import ModalDemo from "./ModalDemo";
+import {FullScreen} from "react-full-screen";
+import Formatter from "./ext/AppFormatter";
+import Sucesss from "./msg/Sucesss";
 
 export class CodeBeautifier extends Component {
 
@@ -25,6 +28,7 @@ export class CodeBeautifier extends Component {
             resultEditRef: React.createRef(),
             splitter: React.createRef(),
             resultWrapper: React.createRef(),
+            popUpRef: React.createRef(),
         };
 
     }
@@ -34,12 +38,29 @@ export class CodeBeautifier extends Component {
 
     componentDidMount = () => {
         // this.jsonParserWorker = new WebWorker(jsonParserWorker);
-        console.log("location",this.props.location.search);
+        console.log("location",this.props);
+        localStorage.removeItem("uuid")
         if(this.props && this.props.location && this.props.location.search){
             let urlSearchParams = new URLSearchParams(this.props.location.search);
-            console.log(urlSearchParams.get("id"));
+            let identifier = `?id=${urlSearchParams.get("id")}`;
             if(urlSearchParams && urlSearchParams.get("id")){
+                axios.get(`/api/xml-editor/${identifier}`)
+                    .then(res => {
+                        let objectData = res.data.data[0];
+                        let content = objectData.content;
+                        content = Encoder.decodeXml(content);
+                        // console.log("content -- ", encodedString);
+                        localStorage.setItem("uuid",objectData.key)
+                        this.state.splitter.current.onInputRequestChange(content);
 
+                        // if(res.data && res.data.code === '00'){
+                        //     localStorage.setItem("uuid",res.data.key)
+                        // }else {
+                        //
+                        // }
+                    }).catch(function (error) {
+                    console.log(error);
+                })
             }
         }
 
@@ -92,6 +113,19 @@ export class CodeBeautifier extends Component {
         return this.state.splitter.current.getResultMode();
     }
 
+    copyData = () => {
+        let inputEditor = this.getInputEditor();
+        let sel = inputEditor.selection.toJSON();
+        inputEditor.selectAll();
+        inputEditor.focus();
+        document.execCommand('copy');
+        inputEditor.selection.fromJSON(sel);
+
+    }
+    clearData = () => {
+        this.state.splitter.current.onInputRequestChange('');
+        this.state.splitter.current.onInputResultChange('');
+    }
 
     undo = () => {
         console.log("undo")
@@ -103,6 +137,31 @@ export class CodeBeautifier extends Component {
         this.getInputEditor().redo();
     }
 
+    minifiedInputEditor = () => {
+        let xmlData = this.getInputEditor().getValue();
+        let validation = this.validateData(xmlData);
+        console.log(validation)
+        if( validation.status === true) {
+            let minifiedXml = Formatter.xmlMinified(xmlData);
+            console.log("final minifed",minifiedXml);
+            this.state.splitter.current.onInputRequestChange(minifiedXml);
+        }
+    }
+    expandInputEditor = () => {
+        let xmlData = this.getInputEditor().getValue();
+        let validation = this.validateData(xmlData);
+        console.log(validation)
+        if( validation.status === true) {
+            let dataSet = Formatter.xmlBeautify(xmlData);
+            this.state.splitter.current.onInputRequestChange(dataSet);
+        }
+    }
+    minifiedResults = () => {
+        this.getResultBlock().minifiedData();
+    }
+    expandResults = () => {
+        this.getResultBlock().expandedData();
+    }
     xmlProcess = () => {
 
         // console.log("xmlProcess",this.getResultSession().getMode().$id)
@@ -172,7 +231,7 @@ export class CodeBeautifier extends Component {
             // console.log(convertToJsonString1)
             // this.getResultEditor().setValue(xmlData);
             // AceBeautifier.beautify(this.getResultSession());
-            return xmlData;
+            return Formatter.xmlBeautify(xmlData);
         }
 
 
@@ -194,7 +253,7 @@ export class CodeBeautifier extends Component {
 
             // let javaScriptVal = parse(value,ParserOptions);
             // console.log(javaScriptVal)
-            let message = JSON.stringify(javaScriptVal,null,'\t');
+            let message = Formatter.jsonBeautify(javaScriptVal);
             return message;
         }
         // let javaScriptVal = {};
@@ -220,7 +279,7 @@ export class CodeBeautifier extends Component {
         this.getResultBlock().processResults(Modes.TREE,javaScriptVal);
     };
 
-    saveContent = () => {
+    saveContent = (refresh = false,shareIt = false) => {
         let userKey = window.location.href;
         let parsedXml = this.parseToXml();
         // /rest/api.php?request=call
@@ -242,7 +301,20 @@ export class CodeBeautifier extends Component {
                 .then(res => {
                     console.log(res);
                     if(res.data && res.data.code === '00'){
-                        localStorage.setItem("uuid",res.data.key)
+                        // debugger;
+                        localStorage.setItem("uuid",res.data.key);
+                        // this.props.history.push("/?id="+res.data.key);
+                        if(refresh){
+                            window.location.replace("/?id="+res.data.key);
+                        }else{
+                            this.props.history.push("/?id="+res.data.key);
+                            this.state.splitter.current.onInputRequestChange(parsedXml);
+                            console.log("shareIt",shareIt,this.state.popUpRef)
+                            if(shareIt){
+                                this.state.popUpRef.current.openModal(userKey);
+                            }
+                        }
+                        //this.state.splitter.current.onInputRequestChange(parsedXml);
                     }else {
 
                     }
@@ -254,7 +326,19 @@ export class CodeBeautifier extends Component {
                 .then(res => {
                     console.log(res);
                     if(res.data && res.data.code === '00'){
-                        localStorage.setItem("uuid",res.data.key)
+                        localStorage.setItem("uuid",res.data.key);
+                        // this.props.history.push("/?id="+res.data.key);
+                        if(refresh){
+                            window.location.replace("/?id="+res.data.key);
+                        }else{
+                            this.props.history.push("/?id="+res.data.key);
+                            this.state.splitter.current.onInputRequestChange(parsedXml);
+                            if(shareIt){
+                                this.state.popUpRef.current.openModal(userKey+"?id="+res.data.key);
+                            }
+                        }
+
+                        //
                     }else {
 
                     }
@@ -265,11 +349,35 @@ export class CodeBeautifier extends Component {
 
     }
 
+    openShare = () => {
+        console.log("this.state.popUpRef.current",this.state.popUpRef.current,window.location)
+        this.saveContent(false,true);
+
+    }
+    handleFull = () => {
+        // console.log("document",document)
+        // let requestFullscreen = window.requestFullscreen();
+        // console.log("requestFullscreen",requestFullscreen)
+
+        let element = document.querySelector("#root");
+
+// make the element go to full-screen mode
+        element.requestFullscreen()
+            .then(function() {
+                // element has entered fullscreen mode successfully
+            })
+            .catch(function(error) {
+                // element could not enter fullscreen mode
+            });
+    }
     render() {
+        console.log("this.state.content",this.state.content);
         return <>
             {/*<ClosingAlert color="red" />*/}
-            <NavBarTailwind />
 
+            <NavBarTailwind />
+            {/*<FullScreen handle={this.props.handleFull}>*/}
+             <ModalDemo  ref={this.state.popUpRef} />
             <ToolBarDemo
                 renderData={this.renderData}
                 xmlProcess={this.xmlProcess}
@@ -277,7 +385,16 @@ export class CodeBeautifier extends Component {
                 treeProcess={this.treeProcess}
                 undo={this.undo}
                 redo={this.redo}
+                minified={this.minifiedInputEditor}
+                expand={this.expandInputEditor}
                 saveContent={this.saveContent}
+                setIsOpen={this.openShare}
+                minifiedResults={this.minifiedResults}
+                expandResults={this.expandResults}
+                copyData={this.copyData}
+                clearData={this.clearData}
+                // handleFull={this.props.handleFull}
+                handleFull={this.handleFull}
             />
 
             <SplitterDemo
@@ -287,6 +404,7 @@ export class CodeBeautifier extends Component {
                 ref={this.state.splitter}
             />
 
+            {/*</FullScreen>*/}
         </>;
     }
 }

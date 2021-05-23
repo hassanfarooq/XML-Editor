@@ -3,7 +3,8 @@ import AceEditorWrapper from "./AceEditorWrapper";
 import Modes from "./ResultModes"
 import VirtualTreeComponent from "./VTreeDemo";
 
-import Encoder from "./ext/demo"
+import Encoder from "./ext/app-encoder"
+import Formatter from "./ext/AppFormatter";
 
 class AceResultWrapper extends Component {
 
@@ -21,6 +22,34 @@ class AceResultWrapper extends Component {
         //     this.state.treeRef.current.noidea();
         // }
         this.setState({editorMode: mode,value:value})
+    }
+
+    expandedData = () => {
+        const {editorMode,value} = this.state;
+        console.log("process Results",editorMode,value);
+        // if(this.state.treeRef && this.state.treeRef.current && mode === ResultModes.TREE && this.state.editorMode === ResultModes.TREE){
+        //     this.state.treeRef.current.noidea();
+        // }
+        if(Modes.XML === editorMode){
+            let expandedData = Formatter.xmlBeautify(value);
+            this.setState({value:expandedData})
+        }else if (Modes.JSON === editorMode){
+            let jsonBeautify = Formatter.jsonBeautify(value);
+            this.setState({value:jsonBeautify})
+        }
+
+    }
+
+    minifiedData = () => {
+        const {editorMode,value} = this.state;
+        console.log("process Results",editorMode,value);
+        if(Modes.XML === editorMode) {
+            let xmlMinified = Formatter.xmlMinified(value);
+            this.setState({value: xmlMinified});
+        }else if (Modes.JSON === editorMode){
+            let jsonMinified = Formatter.jsonMinified(value);
+            this.setState({value: jsonMinified});
+        }
     }
 
     getResultMode = () => {

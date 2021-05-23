@@ -26,6 +26,28 @@ async function getMultiple(page = 1){
 
     return response;
 }
+async function get(key){
+    let response = {
+
+    };
+    try{
+
+
+        const rows = await db.query(
+            'SELECT *  FROM content_xml WHERE `key` = ?',
+            [key]
+        );
+        const data = helper.emptyOrRows(rows);
+
+        response =  {
+            ...response,data
+        }
+    }catch (e) {
+        response = generalServerError();
+    }
+
+    return response;
+}
 async function create(xml){
 
     let response = {message:'Error in creating XML'};
@@ -33,7 +55,7 @@ async function create(xml){
 
 
 
-        let newModel = [ { 'content-key': xml.key, content: xml.content ,timestamp:new Date(),lastupdate:new Date()} ];
+        let newModel = [ { 'key': xml.key, content: xml.content ,timestamp:new Date(),lastupdate:new Date()} ];
         let promise = await db.saveModel('INSERT INTO content_xml SET ?',newModel,false);
 
 
@@ -63,14 +85,12 @@ async function update(id, xml){
 
         let demo = `-- UPDATE content_xml SET content = :content AND lastupdate = :lastupdate WHERE key = :mykey `;
         // let mainQuery = 'UPDATE `content_xml` SET `content-key` = ? AND `lastupdate` = ? WHERE `key` = ?';
-        let mainQuery = 'UPDATE `content_xml` SET `content-key` = ? AND `lastupdate` = ? WHERE `content-key` = ?';
+        let mainQuery = 'UPDATE `content_xml` SET `content` = ?  WHERE `key` = ?';
 
         // console.log("local log ",mainQuery);
 
 
-        const result = await db.saveModel(mainQuery,
-            {content:content,lastupdate:lastupdate,mykey:key},false
-        );
+        const result = await db.query(mainQuery,[content,key]);
 
         if (result.affectedRows) {
             response.code = '00';
@@ -95,5 +115,5 @@ async function update(id, xml){
 module.exports = {
     getMultiple,
     create,
-    update
+    update,get
 }

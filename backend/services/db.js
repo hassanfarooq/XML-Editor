@@ -20,7 +20,7 @@ async function saveModel(sql,modelList,namedParams){
 async function updateModel(sql,modelList,namedParams){
   const connection = await mysql.createConnection(config.db);
   const [results, ] = await connection.query({
-    sql: 'UPDATE content_xml SET content = :content AND lastupdate = :lastupdate WHERE key = :mykey',
+    sql: 'UPDATE content_xml SET content = :content  WHERE key = :mykey',
     values: modelList,
     namedParameters: namedParams,
   })

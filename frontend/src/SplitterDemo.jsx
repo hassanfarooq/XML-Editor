@@ -3,6 +3,7 @@ import * as React from "react";
 import {Splitter} from "@progress/kendo-react-layout";
 import AceEditorWrapper from "./AceEditorWrapper";
 import AceResultWrapper from "./AceResultWrapper";
+import ModalDemo from "./ModalDemo";
 
 export default class SplitterDemo extends React.Component {
   constructor(props) {
@@ -14,9 +15,10 @@ export default class SplitterDemo extends React.Component {
         "    <todo>Play</todo>\n" +
         "  </note>";
     let result = "";
+    console.log("props.content",props.content)
     this.state = {
       panes: [{ min: "5%" }, { size: "50%" }],
-      inputValue:xml,
+      inputValue:props.content ? props.content : xml,
       resultValue:result,
       editorRef:this.props.editorRef,
       resultEditRef:this.props.resultEditRef,
@@ -43,11 +45,16 @@ export default class SplitterDemo extends React.Component {
     });
   }
 
-  onResultChange = (value) => {
-    console.log("result change");
+  onInputRequestChange = (value) => {
+    console.log("onInputRequestChange",value);
     this.setState({
-      resultValue: value
+      inputValue: value
     });
+  }
+  onInputResultChange = (value) => {
+    console.log("onInputRequestChange",value);
+
+    this.state.resultWrapper.current.setState({value:value})
   }
 
   getInputEditor = () => {
@@ -76,16 +83,19 @@ export default class SplitterDemo extends React.Component {
     return this.state.resultWrapper.current.getResultMode();
   }
 
+
   render() {
 
     // console.log(typeof buildObject);
     // console.log(js_beautify(javaScriptVal, { indent_size: 2, space_in_empty_paren: true }));
     return (
       <div>
+
         <Splitter
-          style={{ height: 650 }}
+          // style={{ height: 650 }}
           panes={this.state.panes}
           onChange={this.onChange}
+          className={"h-screen"}
         >
           <AceEditorWrapper name="editor1"
                          readOnly={false}
@@ -98,6 +108,7 @@ export default class SplitterDemo extends React.Component {
           <AceResultWrapper resultEditRef={this.state.resultEditRef} ref={this.state.resultWrapper}
           />
         </Splitter>
+
       </div>
     );
   }
