@@ -92,10 +92,10 @@ export default class SplitterDemo extends React.Component {
       <div>
 
         <Splitter
-          // style={{ height: 650 }}
+          style={{ height: 'calc( 100vh - 64px)' }}
           panes={this.state.panes}
           onChange={this.onChange}
-          className={"h-screen"}
+          // className={"h-screen"}
         >
           <AceEditorWrapper name="editor1"
                          readOnly={false}
