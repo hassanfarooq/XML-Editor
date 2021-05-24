@@ -1,0 +1,36 @@
+{
+  "name": "code-beautifier-core",
+  "version": "1.0.0",
+  "description": "Code Beautifier",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "build-frontend": "cd frontend && npm run build",
+    "build-backend": "cd backend && npm run build",
+    "backend": "cd backend && npm start",
+    "start": "concurrently - kill-others \"npm run backend\" \"npm run frontend\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cpdir": "npx copyfiles \"frontend/build/**/*\" dist",
+    "zip": "npm-build-zip --source=dist",
+    "release": "npm run build-backend && npm run build-frontend && npm run cpdir",
+    "start-release": "cd dist/backend && node index.js",
+    "update:packages": "node wipe-dependencies.js && rmdir /s node_modules && npm update --save-dev && npm update --save && node add-dependencies-version.js && npm audit fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hopeizalive/code-beautifier-core.git"
+  },
+  "author": "Adil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hopeizalive/code-beautifier-core/issues"
+  },
+  "homepage": "https://github.com/hopeizalive/code-beautifier-core#readme",
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "copyfiles": "^2.4.1",
+    "npm-build-zip": "^1.0.3",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {}
+}

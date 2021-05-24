@@ -7,6 +7,7 @@
 /.pnp
 .pnp.js
 /.idea
+/dist
 
 # testing
 /coverage
@@ -21,7 +22,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+backend/package-lock.json
+frontend/package-lock.json

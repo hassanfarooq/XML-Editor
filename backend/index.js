@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var multer = require('multer');
+var path = require('path');
 var upload = multer();
 const app = express();
 const port = 4000;
@@ -14,7 +15,7 @@ app.use(
 );
 app.use(upload.array());
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, '..', 'frontend/build/')));
 const programmingLanguagesRouter = require('./routes/programmingLanguages');
 const xmlEditorRoutes = require('./routes/xmleditor');
 const versionRouter = require('./routes/version');
@@ -41,5 +42,5 @@ app.use((err, req, res, next) => {
   });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`app listening at http://localhost:${port}`)
 });
