@@ -3,9 +3,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 var multer = require('multer');
 var path = require('path');
+const config = require('./config/');
 var upload = multer();
 const app = express();
-const port = 4000;
+const port = 8081;
 
 app.use(bodyParser.json());
 app.use(

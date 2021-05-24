@@ -1,6 +1,6 @@
 const db = require('./db');
 const helper = require('../helper');
-const config = require('../config');
+const config = require('../config/').db;
 const {generalServerError} =  require('../util/serverResponse')
 
 async function getMultiple(page = 1){
@@ -21,6 +21,7 @@ async function getMultiple(page = 1){
             ...response,data,meta
         }
     }catch (e) {
+		console.log(e);
         response = generalServerError();
     }
 

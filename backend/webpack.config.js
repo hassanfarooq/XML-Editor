@@ -31,10 +31,10 @@ module.exports = {
     __dirname: false
   },
   plugins: [
-    // new CopyPlugin({ 
-    //   // patterns: [
-    //   //   // { from: 'config/config.json', to: '' }
-    //   // ]
-    // }),
+     new CopyPlugin({ 
+     patterns: [
+     { from: 'config/config.json', to: '' }
+     ]
+     }),
   ]
 };

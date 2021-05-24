@@ -1,0 +1,15 @@
+{
+	"db":{
+		"connection":{
+		"host":"localhost",
+		"user":"dimsys",
+		"password":"Tx56X56#",
+		"database":"xmleditor"
+		},
+		"listPerPage":"15"
+	},
+	
+	"server":{
+		"port":"4100"
+	}
+}

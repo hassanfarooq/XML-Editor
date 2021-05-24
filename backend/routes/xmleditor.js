@@ -11,10 +11,12 @@ const {generalServerError}  = require('../util/serverResponse')
 xmlEditorRoutes.get('/', async function(req, res, next) {
     try {
         let query = req.query;
+		console.log("query.id -- ",query.id);
         res.json(await xmlEditor.get(query.id));
     } catch (err) {
-        console.error(`Error while getting programming languages `, err.message);
-        res.json(generalServerError())
+        console.log(`Error while getting programming languages `, err.message);
+        //res.json(generalServerError())
+		res.json(err)
     }
 });
 
