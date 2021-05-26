@@ -6,7 +6,7 @@ var path = require('path');
 const config = require('./config/');
 var upload = multer();
 const app = express();
-const port = 8081;
+const port = config && config.server && config.server.port;
 
 app.use(bodyParser.json());
 app.use(
