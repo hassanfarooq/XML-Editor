@@ -15,7 +15,7 @@ export default class SplitterDemo extends React.Component {
         "    <todo>Play</todo>\n" +
         "  </note>";
     let result = "";
-    console.log("props.content",props.content)
+    // console.log("props.content",props.content)
     this.state = {
       panes: [{ min: "5%" }, { size: "50%" }],
       inputValue:props.content ? props.content : xml,
@@ -39,20 +39,20 @@ export default class SplitterDemo extends React.Component {
   };
 
   onInputChange = (value) => {
-    console.log("input change",this.getInputEditor().getValue());
+    // console.log("input change",this.getInputEditor().getValue());
     this.setState({
       inputValue: value
     });
   }
 
   onInputRequestChange = (value) => {
-    console.log("onInputRequestChange",value);
+    // console.log("onInputRequestChange",value);
     this.setState({
       inputValue: value
     });
   }
   onInputResultChange = (value) => {
-    console.log("onInputRequestChange",value);
+    // console.log("onInputRequestChange",value);
 
     this.state.resultWrapper.current.setState({value:value})
   }

@@ -17,7 +17,7 @@ class AceResultWrapper extends Component {
         encodedVal:''
     }
     processResults = (mode,value) => {
-        console.log("process Results",this.state.treeRef);
+        // console.log("process Results",this.state.treeRef);
         // if(this.state.treeRef && this.state.treeRef.current && mode === ResultModes.TREE && this.state.editorMode === ResultModes.TREE){
         //     this.state.treeRef.current.noidea();
         // }
@@ -26,30 +26,36 @@ class AceResultWrapper extends Component {
 
     expandedData = () => {
         const {editorMode,value} = this.state;
-        console.log("process Results",editorMode,value);
+        // console.log("process Results",editorMode,value);
         // if(this.state.treeRef && this.state.treeRef.current && mode === ResultModes.TREE && this.state.editorMode === ResultModes.TREE){
         //     this.state.treeRef.current.noidea();
         // }
-        if(Modes.XML === editorMode){
-            let expandedData = Formatter.xmlBeautify(value);
-            this.setState({value:expandedData})
-        }else if (Modes.JSON === editorMode){
-            let jsonBeautify = Formatter.jsonBeautify(value);
-            this.setState({value:jsonBeautify})
+        if(value){
+            if(Modes.XML === editorMode){
+                let expandedData = Formatter.xmlBeautify(value);
+                this.setState({value:expandedData})
+            }else if (Modes.JSON === editorMode){
+                let jsonBeautify = Formatter.jsonBeautify(value);
+                this.setState({value:jsonBeautify})
+            }
         }
+
 
     }
 
     minifiedData = () => {
         const {editorMode,value} = this.state;
-        console.log("process Results",editorMode,value);
-        if(Modes.XML === editorMode) {
-            let xmlMinified = Formatter.xmlMinified(value);
-            this.setState({value: xmlMinified});
-        }else if (Modes.JSON === editorMode){
-            let jsonMinified = Formatter.jsonMinified(value);
-            this.setState({value: jsonMinified});
+        // console.log("process Results",editorMode,value);
+        if(value){
+            if(Modes.XML === editorMode) {
+                let xmlMinified = Formatter.xmlMinified(value);
+                this.setState({value: xmlMinified});
+            }else if (Modes.JSON === editorMode){
+                let jsonMinified = Formatter.jsonMinified(value);
+                this.setState({value: jsonMinified});
+            }
         }
+
     }
 
     getResultMode = () => {
@@ -69,9 +75,9 @@ class AceResultWrapper extends Component {
             let isEditor = comm.find(m => m === editorMode);
             if(value){
                 let encodedString = Encoder.encodeXml(value);
-                console.log(encodedString)
+                // console.log(encodedString)
                 let decodeXml =Encoder.decodeXml(encodedString);
-                console.log(decodeXml);
+                // console.log(decodeXml);
 
 
                 // console.log(unescape(encodeURIComponent(value)))

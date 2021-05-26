@@ -2,14 +2,14 @@
 	"db":{
 		"connection":{
 		"host":"localhost",
-		"user":"dimsys",
-		"password":"Tx56X56#",
-		"database":"xmleditor"
+		"user":"root",
+		"password":"",
+		"database":"xmleditoronline"
 		},
 		"listPerPage":"15"
 	},
 	
 	"server":{
-		"port":"4100"
+		"port":"4000"
 	}
 }

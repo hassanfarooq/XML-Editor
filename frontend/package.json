@@ -21,6 +21,7 @@
     "he": "^1.2.0",
     "js-beautify": "^1.13.13",
     "json-beautify": "^1.1.1",
+    "prettify-xml": "^1.2.0",
     "prop-types": "15.7.2",
     "react": "^17.0.2",
     "react-ace": "9.4.0",
