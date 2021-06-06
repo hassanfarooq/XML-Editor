@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Splitter} from "@progress/kendo-react-layout";
+import { Splitter } from "@progress/kendo-react-layout";
 import AceEditorWrapper from "./AceEditorWrapper";
 import AceResultWrapper from "./AceResultWrapper";
 import ModalDemo from "./ModalDemo";
@@ -9,20 +9,20 @@ export default class SplitterDemo extends React.Component {
   constructor(props) {
     super(props);
     let xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-        "<note importance=\"high\" logged=\"true\">\n" +
-        "        <title prop=\"demo\">Happy</title>\n" +
-        "    <todo>Work</todo>\n" +
-        "    <todo>Play</todo>\n" +
-        "  </note>";
+      "<note importance=\"high\" logged=\"true\">\n" +
+      "        <title prop=\"demo\">Happy</title>\n" +
+      "    <todo>Work</todo>\n" +
+      "    <todo>Play</todo>\n" +
+      "  </note>";
     let result = "";
     // console.log("props.content",props.content)
     this.state = {
       panes: [{ min: "5%" }, { size: "50%" }],
-      inputValue:props.content ? props.content : xml,
-      resultValue:result,
-      editorRef:this.props.editorRef,
-      resultEditRef:this.props.resultEditRef,
-      resultWrapper:this.props.resultWrapper,
+      inputValue: props.content ? props.content : xml,
+      resultValue: result,
+      editorRef: this.props.editorRef,
+      resultEditRef: this.props.resultEditRef,
+      resultWrapper: this.props.resultWrapper,
 
     };
   }
@@ -32,7 +32,7 @@ export default class SplitterDemo extends React.Component {
     let stateData = {
       panes: event.newState
     }
-    if(this.getInputEditor() && this.getInputEditor().getValue()){
+    if (this.getInputEditor() && this.getInputEditor().getValue()) {
       stateData.inputValue = this.getInputEditor().getValue();
     }
     this.setState(stateData);
@@ -54,7 +54,7 @@ export default class SplitterDemo extends React.Component {
   onInputResultChange = (value) => {
     // console.log("onInputRequestChange",value);
 
-    this.state.resultWrapper.current.setState({value:value})
+    this.state.resultWrapper.current.setState({ value: value })
   }
 
   getInputEditor = () => {
@@ -95,20 +95,26 @@ export default class SplitterDemo extends React.Component {
           style={{ height: 'calc( 100vh - 64px)' }}
           panes={this.state.panes}
           onChange={this.onChange}
-          // className={"h-screen"}
+        // className={"h-screen"}
         >
           <AceEditorWrapper name="editor1"
-                         readOnly={false}
-                         value={this.state.inputValue}
-                         mode={"xml"}
-                            theme={"monokai"}
-                         ref={this.state.editorRef}
-                            onInputChange = {null}
+            readOnly={false}
+            value={this.state.inputValue}
+            mode={"xml"}
+            theme={"monokai"}
+            ref={this.state.editorRef}
+            onInputChange={null}
           />
+
           <AceResultWrapper resultEditRef={this.state.resultEditRef} ref={this.state.resultWrapper}
           />
-        </Splitter>
 
+        </Splitter>
+        <div class="fixed inset-2/4 z-50 bg-white rounded-full h-16 w-16 flex items-center justify-center cursor-pointer" style={{ left: '48.1%' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+          </svg>
+        </div>
       </div>
     );
   }

@@ -62,23 +62,18 @@ function classNames(...classes) {
 
 export default function NavBarTailwind() {
     return (
-        <Popover className="relative bg-white dark:bg-gray-800">
+        <Popover className="relative border-b-2 dark:border-DarkBorderUp border-lightBorderUp">
             {({ open }) => (
                 <>
-                    <div className="max-w-7x2 mx-auto px-4 sm:px-6">
-                        <div className="flex justify-between items-center border-b-2 dark:border-gray-600 border-gray-100 py-1 md:justify-start md:space-x-10">
-                            <div className="flex justify-start">
-                                <a href="#">
-                                    <span className="font-medium dark:text-white">XML</span>
-                                </a>
-                            </div>
+                    <div className="max-w-7x2 mx-auto">
+                        <div className="flex justify-between items-center py-1 md:justify-start">                            
                             <div className="-mr-2 -my-2 md:hidden">
-                                <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                <Popover.Button className="rounded-md p-2 inline-flex items-center justify-center text-lightText hover:text-gray-500 hover:bg-DarkBG focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                     <span className="sr-only">Open menu</span>
                                     <MenuIcon className="h-6 w-6" aria-hidden="true" />
                                 </Popover.Button>
                             </div>
-                            <Popover.Group as="nav" className="hidden md:flex space-x-2">
+                            <Popover.Group as="nav" className="hidden md:flex space-x-2 m-0">
                                 {navigation.map((firstLevel) => (
 
                                     firstLevel.child.length > 0 ?
@@ -87,14 +82,14 @@ export default function NavBarTailwind() {
                                                 <>
                                                     <Popover.Button
                                                         className={classNames(
-                                                            open ? 'text-gray-900' : 'text-gray-500',
-                                                            'group bg-white dark:bg-gray-800 inline-flex items-center text-base font-small hover:text-gray-900 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-800'
+                                                            open ? 'text-lightText' : 'text-lightText',
+                                                            'group bg-white dark:bg-DarkBG inline-flex items-center text-base font-small hover:text-DarkBG focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-800'
                                                         )}
                                                     >
-                                                        <span className="text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:bg-gray-100 px-1">{firstLevel.name}</span>
+                                                        <span className="text-lightText dark:text-DarkText dark:hover:bg-DarkBG hover:bg-gray-100 px-1">{firstLevel.name}</span>
                                                         <ChevronDownIcon
                                                             className={classNames(
-                                                                open ? 'text-gray-600' : 'text-gray-400',
+                                                                open ? 'text-lightText' : 'text-lightText',
                                                                 'mt-1 h-5 w-5 group-hover:text-gray-500'
                                                             )}
                                                             aria-hidden="true"
@@ -124,14 +119,14 @@ export default function NavBarTailwind() {
                                                                                     <>
                                                                                         <Popover.Button style={{width:'100%'}}
                                                                                             className={classNames(
-                                                                                                openSecond ? 'text-gray-900' : 'text-gray-500',
+                                                                                                openSecond ? 'text-lightText' : 'text-lightText',
                                                                                                 'group bg-white  inline-flex items-center text-base font-small hover:text-gray-900 focus:outline-none focus:ring-1 focus:ring-offset-1'
                                                                                             )}
                                                                                         >
-                                                                                            <span className="flex-grow text-left text-gray-900 dark:text-black dark:hover:bg-white-600 hover:bg-gray-100 px-1">{secondLevel.name}</span>
+                                                                                            <span className="flex-grow text-left text-lightText dark:text-DarkText dark:hover:bg-white-600 hover:bg-gray-100 px-1">{secondLevel.name}</span>
                                                                                             <ChevronRightIcon
                                                                                                 className={classNames(
-                                                                                                    openSecond ? 'text-gray-600' : 'text-gray-400',
+                                                                                                    openSecond ? 'text-lightText' : 'text-lightText',
                                                                                                     'mt-1 h-5 w-5 group-hover:text-gray-500'
                                                                                                 )}
                                                                                                 aria-hidden="true"
@@ -161,7 +156,7 @@ export default function NavBarTailwind() {
                                                                                                                 className="-m-3 p-1 flex items-start rounded-lg hover:bg-gray-50"
                                                                                                             >
                                                                                                                 <div className="ml-4">
-                                                                                                                    <p className="text-base font-small text-gray-900">{thirdLevel.name}</p>
+                                                                                                                    <p className="text-base font-small text-lightText">{thirdLevel.name}</p>
                                                                                                                 </div>
                                                                                                             </a>
                                                                                                         ))}
@@ -179,7 +174,7 @@ export default function NavBarTailwind() {
                                                                                 className="-m-3 p-1 flex items-start rounded-lg hover:bg-gray-50"
                                                                             >
                                                                                 <div className="ml-3">
-                                                                                    <p className="text-base font-small text-gray-900">{secondLevel.name}</p>
+                                                                                    <p className="text-base font-small text-lightText">{secondLevel.name}</p>
                                                                                 </div>
                                                                             </a>
                                                                     ))}
@@ -192,7 +187,7 @@ export default function NavBarTailwind() {
                                         </Popover>
                                         :
                                         <a href="#" className="text-base font-small">
-                                            <span className="text-left flex-grow text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:bg-gray-100 px-1">{firstLevel.name}</span>
+                                            <span className="text-left flex-grow text-lightText dark:text-DarkText dark:hover:bg-gray-600 hover:bg-gray-100 px-1">{firstLevel.name}</span>
                                         </a>
                                 ))}
 
@@ -200,16 +195,16 @@ export default function NavBarTailwind() {
                             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
 
                                 <div class="flex justify-end items-center space-x-2">
-                                    <span class="text-sm text-gray-900 light dark:text-white">Light</span>
+                                    <span class="text-sm text-lightText light dark:text-DarkText">Light</span>
                                     <div>
                                         <input type="checkbox" name="" id="toggle" class="hidden" />
                                         <label for="toggle" >
                                             <div class="w-9 h-5 flex items-center bg-gray-300 rounded-full p-1">
-                                                <div class="toggle-dot w-4 h-4 bg-white dark:bg-gray-500 rounded-full shadow-md transform duration-300 ease-in-out"></div>
+                                                <div class="toggle-dot w-4 h-4 bg-white dark:bg-DarkText rounded-full shadow-md transform duration-300 ease-in-out"></div>
                                             </div>
                                         </label>
                                     </div>
-                                    <span class="text-sm text-gray-900 light dark:text-white">Dark</span>
+                                    <span class="text-sm text-lightText light dark:text-DarkText">Dark</span>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +232,7 @@ export default function NavBarTailwind() {
                                             <span className="font-medium">XML</span>
                                         </div>
                                         <div className="-mr-2">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-lightText hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                                 <span className="sr-only">Close menu</span>
                                                 <XIcon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
@@ -251,7 +246,7 @@ export default function NavBarTailwind() {
                                                     href={item.href}
                                                     className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
                                                 >
-                                                    <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
+                                                    <span className="ml-3 text-base font-medium text-lightText">{item.name}</span>
                                                 </a>
                                             ))}
                                         </nav>
@@ -263,262 +258,6 @@ export default function NavBarTailwind() {
                 </>
             )}
         </Popover>
-        // <Disclosure as="nav" className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 flex-wrap p-6">
-        //     {({ open }) => (
-        //         <>
-        //             <div className="flex items-center flex-grow text-black mr-6">
-        //                 <span class="font-semibold text-xl tracking-tight">XML</span>
-        //                 <div className="relative flex  flex-grow h-8">
-        //                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        //                         {/* Mobile menu button*/}
-        //                         <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-        //                             <span className="sr-only">Open main menu</span>
-        //                             {open ? (
-        //                                 <XIcon className="block h-6 w-6" aria-hidden="true" />
-        //                             ) : (
-        //                                 <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-        //                             )}
-        //                         </Disclosure.Button>
-        //                     </div>
-        //                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-        //                         <div className="hidden sm:block sm:ml-6">
-        //                             <div className="flex space-x-0">
-        //                                 {navigation.map((item) => (
-        //                                     <a
-        //                                         key={item.name}
-        //                                         href={item.href}
-        //                                         className={classNames(
-        //                                             item.current ? 'bg-gray-900 text-white' : 'text-black-300 hover:bg-gray-700 hover:text-white dark:text-gray-300',
-        //                                             'px-3 py-2'
-        //                                         )}
-        //                                         aria-current={item.current ? 'page' : undefined}
-        //                                     >
-        //                                         {item.name}
-        //                                         {item.child.length > 0 ? 
-        //                                          <Transition show={open}>
-        //                                              <Menu.Items static className="origin-top-right absolute left-0 mt-2 w-48 shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-        //                                                  {item.child.map((childItem) => (
-        //                                                     <Menu.Item>
-        //                                                         {({ active }) => (
-        //                                                             <a href="#" className={classNames(active ? 'bg-gray-100': '', 'block px-4 py-2 text-sm text-gray-700 text-left')}>
-        //                                                                 {childItem.name}
-        //                                                             </a>
-        //                                                         )}
-        //                                                     </Menu.Item>
-        //                                                  ))}
-        //                                              </Menu.Items>
-        //                                          </Transition>
-        //                                          : ""
-        //                                          }
-        //                                     </a>
-        //                                 ))}
-        //                                 {/* Profile dropdown */}
-        //                                 <Menu as="div" className="ml-3 relative">
-        //                                     {({ open }) => (
-        //                                         <>
-        //                                             <div>
-        //                                                 <Menu.Button className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-        //                                                     Options
-        //                                                      {/* <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" /> */}
-        //                                                     {/* <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg> */}
-        //                                                 </Menu.Button>
-        //                                             </div>
-        //                                             <Transition
-        //                                                 show={open}
-        //                                                 as={Fragment}
-        //                                                 enter="transition ease-out duration-100"
-        //                                                 enterFrom="transform opacity-0 scale-95"
-        //                                                 enterTo="transform opacity-100 scale-100"
-        //                                                 leave="transition ease-in duration-75"
-        //                                                 leaveFrom="transform opacity-100 scale-100"
-        //                                                 leaveTo="transform opacity-0 scale-95"
-        //                                             >
-        //                                                 <Menu.Items
-        //                                                     static
-        //                                                     className="origin-top-right absolute left-0 mt-2 w-48 shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-        //                                                 >
-        //                                                     <Menu.Item>
-        //                                                         {({ active }) => (
-        //                                                             <a
-        //                                                                 href="#"
-        //                                                                 className={classNames(
-        //                                                                     active ? 'bg-gray-100' : '',
-        //                                                                     'block px-4 py-2 text-sm text-gray-700 text-left'
-        //                                                                 )}
-        //                                                             >
-        //                                                                 Settings</a>
-        //                                                         )}
-        //                                                     </Menu.Item>
-        //                                                     <Menu.Item>
-        //                                                         {({ active }) => (
-        //                                                             <a
-        //                                                                 href="#"
-        //                                                                 className={classNames(
-        //                                                                     active ? 'bg-gray-100' : '',
-        //                                                                     'block px-4 py-2 text-sm text-gray-700 text-left'
-        //                                                                 )}
-        //                                                             >
-        //                                                                 View License
-        //                                                             </a>
-        //                                                         )}
-        //                                                     </Menu.Item>
-        //                                                     <Menu.Item>
-        //                                                         {({ active }) => (
-        //                                                             <a
-        //                                                                 href="#"
-        //                                                                 className={classNames(
-        //                                                                     active ? 'bg-gray-100' : '',
-        //                                                                     'block px-4 py-2 text-sm text-gray-700 text-left'
-        //                                                                 )}
-        //                                                             >
-        //                                                                 About
-        //                                                             </a>
-        //                                                         )}
-        //                                                     </Menu.Item>
-        //                                                 </Menu.Items>
-        //                                             </Transition>
-        //                                         </>
-        //                                     )}
-        //                                 </Menu>
-
-        //                                 <a href="#" class="inline-block py-2 px-3 text-gray-400 cursor-not-allowed underline">Last edited was yesterday at 23:16</a>
-
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        //                         <div class="flex justify-end items-center space-x-2">
-        //                             <span class="text-sm text-white light dark:text-gray-500">Light</span>
-        //                             <div>
-        //                                 <input type="checkbox" name="" id="toggle" class="hidden" />
-        //                                 <label for="toggle" >
-        //                                     <div class="w-9 h-5 flex items-center bg-gray-300 rounded-full p-1">
-        //                                         <div class="toggle-dot w-4 h-4 bg-white rounded-full shadow-md transform duration-300 ease-in-out"></div>
-        //                                     </div>
-        //                                 </label>
-        //                             </div> 
-        //                             <span class="text-sm text-gray-500 dark:text-gray-100">Dark</span>
-        //                         </div>
-        //                         <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-        //                             <span className="sr-only">View notifications</span>
-        //                             <BellIcon className="h-6 w-6" aria-hidden="true" />
-        //                         </button>
-
-        //                         {/* Profile dropdown */}
-        //                         <Menu as="div" className="ml-3 relative">
-        //                             {({ open }) => (
-        //                                 <>
-        //                                     <div>
-        //                                         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-        //                                             <span className="sr-only">Open user menu</span>
-        //                                             <img
-        //                                                 className="h-8 w-8 rounded-full"
-        //                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        //                                                 alt=""
-        //                                             />
-        //                                         </Menu.Button>
-        //                                     </div>
-        //                                     <Transition
-        //                                         show={open}
-        //                                         as={Fragment}
-        //                                         enter="transition ease-out duration-100"
-        //                                         enterFrom="transform opacity-0 scale-95"
-        //                                         enterTo="transform opacity-100 scale-100"
-        //                                         leave="transition ease-in duration-75"
-        //                                         leaveFrom="transform opacity-100 scale-100"
-        //                                         leaveTo="transform opacity-0 scale-95"
-        //                                     >
-        //                                         <Menu.Items
-        //                                             static
-        //                                             className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-        //                                         >
-        //                                             <Menu.Item>
-        //                                                 {({ active }) => (
-        //                                                     <a
-        //                                                         href="#"
-        //                                                         className={classNames(
-        //                                                             active ? 'bg-gray-100' : '',
-        //                                                             'block px-4 py-2 text-sm text-gray-700'
-        //                                                         )}
-        //                                                     >
-        //                                                         Your Profile
-        //                                                     </a>
-        //                                                 )}
-        //                                             </Menu.Item>
-        //                                             <Menu.Item>
-        //                                                 {({ active }) => (
-        //                                                     <a
-        //                                                         href="#"
-        //                                                         className={classNames(
-        //                                                             active ? 'bg-gray-100' : '',
-        //                                                             'block px-4 py-2 text-sm text-gray-700'
-        //                                                         )}
-        //                                                     >
-        //                                                         Settings
-        //                                                     </a>
-        //                                                 )}
-        //                                             </Menu.Item>
-        //                                             <Menu.Item>
-        //                                                 {({ active }) => (
-        //                                                     <a
-        //                                                         href="#"
-        //                                                         className={classNames(
-        //                                                             active ? 'bg-gray-100' : '',
-        //                                                             'block px-4 py-2 text-sm text-gray-700'
-        //                                                         )}
-        //                                                     >
-        //                                                         Sign out
-        //                                                     </a>
-        //                                                 )}
-        //                                             </Menu.Item>
-        //                                         </Menu.Items>
-        //                                     </Transition>
-        //                                 </>
-        //                             )}
-        //                         </Menu>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //             <div className="block lg:hidden">
-        //                 <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-        //                     <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
-        //                 </button>
-        //             </div>
-        //             {/* <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        //                 <div className="text-sm lg:flex-grow">
-        //                 {navigation.map((item) => (
-        //                         <a
-        //                             key={item.name}
-        //                             href={item.href}
-        //                             className={classNames(
-        //                                 item.current ? 'block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4' : 'block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4'
-        //                             )}
-        //                             aria-current={item.current ? 'page' : undefined}
-        //                         >
-        //                             {item.name}
-        //                         </a>
-        //                     ))}
-        //                 </div>
-        //             </div>*/}
-        //             <Disclosure.Panel className="sm:hidden">
-        //                 <div className="px-2 pt-2 pb-3 space-y-1">
-        //                     {navigation.map((item) => (
-        //                         <a
-        //                             key={item.name}
-        //                             href={item.href}
-        //                             className={classNames(
-        //                                 item.current ? 'block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4' : 'block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4'
-        //                             )}
-        //                             aria-current={item.current ? 'page' : undefined}
-        //                         >
-        //                             {item.name}
-        //                         </a>
-        //                     ))}
-        //                 </div>
-        //             </Disclosure.Panel>
-        //         </>
-        //     )}
-        // </Disclosure>
     )
 }
 

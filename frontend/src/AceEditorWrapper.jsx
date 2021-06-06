@@ -57,7 +57,7 @@ export default class AceEditorWrapper extends React.Component {
         theme={this.props.theme}
         onChange={this.onChange}
         name={this.props.name}
-        editorProps={{ $blockScrolling: true }}
+        editorProps={{ $blockScrolling: false }}
         value={this.props.value}
         // annotations={annotations}
         setOptions={{

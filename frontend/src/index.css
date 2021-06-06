@@ -4,6 +4,20 @@
     @apply translate-x-3
 }
 
+.tooltip {
+    @apply invisible absolute;
+    @apply bg-DarkBG;
+    @apply dark:bg-DarkText;
+    @apply text-lightText;
+    @apply p-1;
+    @apply z-50;
+    @apply rounded-md;
+}
+  
+.has-tooltip:hover .tooltip {
+    @apply visible z-50
+}
+
 @tailwind components;
 @tailwind utilities;
 
