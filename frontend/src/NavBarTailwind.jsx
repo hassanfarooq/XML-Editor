@@ -130,7 +130,7 @@ export default function NavBarTailwind() {
                 <>
                     <div className="max-w-7x2 mx-auto">
                         <div className="flex justify-between items-center py-1 md:justify-start">
-                            <div className="-mr-2 -my-2 md:hidden">
+                            <div className="-mr-2 -my-2 md:hidden"> 
                                 <Popover.Button className="rounded-md p-2 inline-flex items-center justify-center text-black hover:text-gray-500 hover:bg-DarkBG focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                     <span className="sr-only">Open menu</span>
                                     <MenuIcon className="h-6 w-6" aria-hidden="true" />
