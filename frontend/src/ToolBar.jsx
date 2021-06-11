@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition, Popover } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faCopy, faCode, faReply, faShare, faSave, faShareAlt, faPlay, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
+import { FaBeer } from 'react-icons/fa';
 
 const formatType = [
     { name: 'XML', type: 'xml' },
@@ -17,42 +18,43 @@ function classNames(...classes) {
 
 export default function ToolBarDemo(props) {
     return (
-        <div className="flex w-full border-solid py-1 border-t-2 dark:border-DarkBorderBottom border-lightBorderBottom">
+        <div className="flex w-full border-solid pt-1">
 
             <div className="flex w-2/4">
                 {/*Clear Button*/}
-                <div className="cursor-pointer px-1 has-tooltip" onClick={props.clearData}>
-                    <FontAwesomeIcon icon={faFile} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
-                    <span class='tooltip'>Clear</span>
+                <div className="cursor-pointer p-1 pl-1 px-2.5 has-tooltip" onClick={props.clearData}>
+                    {/* <FaBeer /> */}
+                    <FontAwesomeIcon icon={faFile} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
+                    {/* <span class='tooltip'>Clear</span> */}
                 </div>
                 {/*Copy Button*/}
-                <div className="cursor-pointer px-1" onClick={props.copyData}>
-                    <FontAwesomeIcon icon={faCopy} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.copyData}>
+                    <FontAwesomeIcon icon={faCopy} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
                 {/*Expand*/}
-                <div className="cursor-pointer px-1" onClick={props.expand}>
-                    <FontAwesomeIcon icon={faExpandAlt} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.expand}>
+                    <FontAwesomeIcon icon={faExpandAlt} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
                 {/*Minified*/}
-                <div className="cursor-pointer px-1" onClick={props.minified}>
-                    <FontAwesomeIcon icon={faCode} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.minified}>
+                    <FontAwesomeIcon icon={faCode} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <div className="cursor-pointer px-1" onClick={props.undo}>
-                    <FontAwesomeIcon icon={faReply} class="transform -rotate-45 text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.undo}>
+                    <FontAwesomeIcon icon={faReply} class="transform -rotate-45 text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <div className="cursor-pointer px-1" onClick={props.redo}>
-                    <FontAwesomeIcon icon={faShare} class="transform rotate-45 scale-x-100 text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.redo}>
+                    <FontAwesomeIcon icon={faShare} class="transform rotate-45 scale-x-100 text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <Menu as="div" className="ml-3 relative">
+                <Menu as="div" className="relative">
                     {({ open }) => (
                         <>
                             <div>
-                                <Menu.Button className="bg-white dark:bg-DarkBG flex px-1 focus:outline-none focus:ring-1 focus:ring-offset-2 hover:text-gray-900 focus:ring-gray-800">
-                                    <span className="text-lightIcon dark:text-gray-500 dark:hover:bg-gray-600 hover:bg-gray-100 px-1">Font 12px</span>
+                                <Menu.Button className="bg-white dark:bg-DarkBG flex focus:outline-none focus:ring-1 focus:ring-offset-2 hover:text-gray-900 focus:ring-gray-800 pt-0.5 px-2.5">
+                                    <span className="text-lightIcon dark:text-gray-500 dark:hover:bg-gray-600 hover:bg-gray-100 text-sm">Font 12px</span>
                                     <ChevronDownIcon
                                         className={classNames(
                                             open ? 'text-gray-600' : 'text-lightIcon',
-                                            'mt-1 h-5 w-5 group-hover:text-gray-500'
+                                            'mt-1 h-4 w-4 group-hover:text-gray-500'
                                         )}
                                         aria-hidden="true"
                                     />
@@ -61,12 +63,6 @@ export default function ToolBarDemo(props) {
                             <Transition
                                 show={open}
                                 as={Fragment}
-                                enter="transition ease-out duration-100"
-                                enterFrom="transform opacity-0 scale-95"
-                                enterTo="transform opacity-100 scale-100"
-                                leave="transition ease-in duration-75"
-                                leaveFrom="transform opacity-100 scale-100"
-                                leaveTo="transform opacity-0 scale-95"
                             >
                                 <Menu.Items
                                     static
@@ -116,29 +112,29 @@ export default function ToolBarDemo(props) {
                         </>
                     )}
                 </Menu>
-                <div className="cursor-pointer px-1" onClick={() => props.saveContent(false)}>
-                    <FontAwesomeIcon icon={faSave} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={() => props.saveContent(false)}>
+                    <FontAwesomeIcon icon={faSave} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <div className="cursor-pointer px-1" onClick={props.setIsOpen}>
-                    <FontAwesomeIcon icon={faShareAlt} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.setIsOpen}>
+                    <FontAwesomeIcon icon={faShareAlt} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <div className="cursor-pointer px-1 " onClick={props.renderData}>
-                    <FontAwesomeIcon icon={faPlay} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div id="playButton" className="cursor-pointer p-1 px-2.5" onClick={props.renderData}>
+                    <FontAwesomeIcon icon={faPlay} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
             </div>
 
             <div className="flex w-2/4 justify-end">
 
-                <Menu as="div" className="ml-3 relative">
+                <Menu as="div" className="ml-3 relative p-1 px-2.5">
                     {({ open }) => (
                         <>
                             <div>
-                                <Menu.Button className="bg-white dark:bg-DarkBG flex px-1 focus:outline-none focus:ring-1 focus:ring-offset-2 hover:text-gray-900 focus:ring-gray-800">
-                                    <span className="text-lightIcon dark:text-gray-500 dark:hover:bg-gray-600 hover:bg-gray-100 px-1">XML</span>
+                                <Menu.Button className="bg-white dark:bg-DarkBG flex focus:outline-none focus:ring-1 focus:ring-offset-2 hover:text-gray-900 focus:ring-gray-800">
+                                    <span className="text-lightIcon dark:text-gray-500 dark:hover:bg-gray-600 hover:bg-gray-100 text-sm">XML</span>
                                     <ChevronDownIcon
                                         className={classNames(
                                             open ? 'text-lightIcon' : 'text-lightIcon',
-                                            'mt-1 h-5 w-5 group-hover:text-gray-500'
+                                            'mt-0.5 h-4 w-4 group-hover:text-gray-500'
                                         )}
                                         aria-hidden="true"
                                     />
@@ -147,12 +143,6 @@ export default function ToolBarDemo(props) {
                             <Transition
                                 show={open}
                                 as={Fragment}
-                                enter="transition ease-out duration-100"
-                                enterFrom="transform opacity-0 scale-95"
-                                enterTo="transform opacity-100 scale-100"
-                                leave="transition ease-in duration-75"
-                                leaveFrom="transform opacity-100 scale-100"
-                                leaveTo="transform opacity-0 scale-95"
                             >
                                 <Menu.Items
                                     static
@@ -199,38 +189,17 @@ export default function ToolBarDemo(props) {
                                                 TREE</a>
                                         )}
                                     </Menu.Item>
-                                    {/* {formatType.map((item) => (
-
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    href="#"
-                                                    className={classNames(
-                                                        active ? 'bg-gray-100' : '',
-                                                        'block px-4 py-2 text-sm text-gray-700 text-left'
-                                                    )}
-                                                    onClick={props.xmlProcess}
-                                                >
-                                                    {item.name}</a>
-                                            )}
-                                        </Menu.Item>
-                                    ))} */}
-
                                 </Menu.Items>
                             </Transition>
                         </>
                     )}
                 </Menu>
-                <div className="cursor-pointer px-1 text-lightIcon dark:text-gray-500 rounded" onClick={props.handleFull}>Full Screen</div>
 
-                {/* <div className="cursor-pointer px-1 text-black-500 dark:text-gray-500 rounded" onClick={props.xmlProcess}>XML</div>
-                <div className="cursor-pointer px-1 text-black-500 dark:text-gray-500 rounded" onClick={props.jsonProcess}>JSON</div>
-                <div className="cursor-pointer px-1 text-black-500 dark:text-gray-500 rounded" onClick={props.treeProcess}>TREE</div> */}
-                <div className="cursor-pointer px-1" onClick={props.expandResults}>
-                    <FontAwesomeIcon icon={faExpandAlt} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.expandResults}>
+                    <FontAwesomeIcon icon={faExpandAlt} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
-                <div className="cursor-pointer px-1" onClick={props.minifiedResults}>
-                    <FontAwesomeIcon icon={faCode} class="text-lightIcon dark:text-gray-500 h-5 w-5" />
+                <div className="cursor-pointer p-1 px-2.5" onClick={props.minifiedResults}>
+                    <FontAwesomeIcon icon={faCode} class="text-lightIcon dark:text-gray-500 h-4 w-4" />
                 </div>
             </div>
         </div>

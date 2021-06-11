@@ -384,8 +384,8 @@ export class CodeBeautifier extends Component {
         return <>
             {/*<ClosingAlert color="red" />*/}
             <div class="flex dark:bg-DarkBG pr-3">
-                <div class="w-20 p-2">
-                    <img src="logo.png" class="h-14 w-14" />
+                <div class="w-20 p-3 pt-3">
+                    <img src="logo4.svg" class="h-12 w-12" />
                 </div>
                 <div class="w-full">
                     <NavBarTailwind />

@@ -5,6 +5,11 @@ import AceEditorWrapper from "./AceEditorWrapper";
 import AceResultWrapper from "./AceResultWrapper";
 import ModalDemo from "./ModalDemo";
 
+const play = () => {
+  // console.log("Hello World!") 
+  document.getElementById("playButton").click();
+ }
+
 export default class SplitterDemo extends React.Component {
   constructor(props) {
     super(props);
@@ -82,6 +87,7 @@ export default class SplitterDemo extends React.Component {
   getResultMode = () => {
     return this.state.resultWrapper.current.getResultMode();
   }
+  
 
 
   render() {
@@ -92,7 +98,7 @@ export default class SplitterDemo extends React.Component {
       <div>
 
         <Splitter
-          style={{ height: 'calc( 100vh - 64px)' }}
+          style={{ height: 'calc( 100vh - 72px)' }}
           panes={this.state.panes}
           onChange={this.onChange}
         // className={"h-screen"}
@@ -104,17 +110,16 @@ export default class SplitterDemo extends React.Component {
             theme={"monokai"}
             ref={this.state.editorRef}
             onInputChange={null}
-          />
-
+          ></AceEditorWrapper>
           <AceResultWrapper resultEditRef={this.state.resultEditRef} ref={this.state.resultWrapper}
           />
 
         </Splitter>
-        <div class="fixed inset-2/4 z-50 bg-white rounded-full h-16 w-16 flex items-center justify-center cursor-pointer" style={{ left: '48.1%' }}>
+        {/* <div class="fixed inset-2/4 z-50 bg-white rounded-full h-16 w-16 flex items-center justify-center cursor-pointer" onClick={play} style={{ left: '48.1%' }}>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-600" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
           </svg>
-        </div>
+        </div> */}
       </div>
     );
   }
